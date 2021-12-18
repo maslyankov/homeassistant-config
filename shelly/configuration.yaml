@@ -1,5 +1,6 @@
-# Shelly Plus 1 Light
+
 light:
+  # Shelly Plus 1 Light
   - platform: mqtt
     schema: template
     name: "Marty Room Main Lights"
@@ -10,3 +11,14 @@ light:
     state_template: "{{'on' if value_json.output == true else 'off' }}"
     command_on_template: '{"id":1, "src": "homeassistant/shellies/shellyplus1-a8032abc5b4c", "method": "Switch.Set", "params":{"id":0,"on":true}}'
     command_off_template: '{"id":1, "src": "homeassistant/shellies/shellyplus1-a8032abc5b4c", "method": "Switch.Set", "params":{"id":0,"on":false}}'
+  
+  # Shelly 2.5 Channel 1 Light
+  - platform: mqtt
+    unique_id: marty_bathroom_light
+    name: "Marty Bathroom Light"
+    state_topic: "shellies/shellyswitch25-C45BBE6B443B/relay/0"
+    command_topic: "shellies/shellyswitch25-C45BBE6B443B/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+    qos: 1
