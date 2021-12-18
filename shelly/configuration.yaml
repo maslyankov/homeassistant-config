@@ -22,3 +22,21 @@ light:
     payload_off: "off"
     retain: false
     qos: 1
+
+sensor:
+  # Shelly 2.5 Channel 1 Light
+  - platform: mqtt
+    unique_id: sensor_power_consumption_shelly25_0
+    name: "Marty Bathroom Shelly 2.5 Power Consumption Relay 0"
+    state_topic: "shellies/shellyswitch25-C45BBE6B443B/relay/0/power"
+    unit_of_measurement: "W"
+  - platform: mqtt
+    unique_id: sensor_power_consumption_shelly25_1
+    name: "Marty Bathroom Shelly 2.5 Power Consumption Relay 1"
+    state_topic: "shellies/shellyswitch25-C45BBE6B443B/relay/1/power"
+    unit_of_measurement: "W"
+  - platform: mqtt
+    unique_id: sensor_temperature_marty_shelly25
+    name: "Temperature Shelly 2.5 - Martys Bathroom"
+    state_topic: "shellies/shellyswitch25-C45BBE6B443B/temperature"
+    unit_of_measurement: "ºC"
