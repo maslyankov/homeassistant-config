@@ -1,0 +1,13 @@
+# Dingtian IoT Relay - Ethernet/WiFi etc
+lock:
+  - platform: mqtt
+    unique_id: frontdoor_lock_mqtt
+    name: Front Door
+    availability_topic: "/dingtian/relay5772/out/lwt_availability"
+    payload_available: "online"
+    payload_not_available: "offline"
+    command_topic: "/dingtian/relay5772/in/control"
+    payload_lock: '{"type":"DELAY","idx":"1","status":"ON","time":"3","pass":"0"}'
+    payload_unlock: ""
+    qos: 1
+    retain: false
