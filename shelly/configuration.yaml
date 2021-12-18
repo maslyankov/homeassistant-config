@@ -1,0 +1,12 @@
+# Shelly Plus 1 Light
+light:
+  - platform: mqtt
+    schema: template
+    name: "Marty Room Main Lights"
+    unique_id: shellyplus1-a8032abc5b4c_mqtt
+    qos: 1
+    state_topic: "shellyplus1-a8032abc5b4c/status/switch:0"
+    command_topic: "shellyplus1-a8032abc5b4c/rpc"
+    state_template: "{{'on' if value_json.output == true else 'off' }}"
+    command_on_template: '{"id":1, "src": "homeassistant/shellies/shellyplus1-a8032abc5b4c", "method": "Switch.Set", "params":{"id":0,"on":true}}'
+    command_off_template: '{"id":1, "src": "homeassistant/shellies/shellyplus1-a8032abc5b4c", "method": "Switch.Set", "params":{"id":0,"on":false}}'
