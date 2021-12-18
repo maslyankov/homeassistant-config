@@ -1,0 +1,49 @@
+
+# Tasmota OpenTherm Gas Heater
+climate:
+  - platform: mqtt
+    unique_id: gasheater_central_heating
+    name: Gas Heater Central Heating
+    availability_topic: "tele/tasmota_457B8E/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    modes:
+      - "off"
+      - "heat"
+    max_temp: 80.0
+    min_temp: 30.0
+    send_if_off: false
+    mode_command_topic: "cmnd/tasmota_457B8E/ot_ch"
+    mode_command_template: >-
+      {{ 1 if 'heat' else 0 }}
+    payload_on: "1"
+    payload_off: "0"
+    mode_state_topic: "tele/tasmota_457B8E/SENSOR"
+    mode_state_template: >-
+      {{ 'heat' if value_json["OPENTHERM"]["SLAVE"]["CH"] else 'off' }}
+    temperature_state_topic: "tele/tasmota_457B8E/SENSOR"
+    temperature_state_template: "{{ value_json['OPENTHERM']['BTMP']['REQ'] }}"
+    temperature_command_topic: "cmnd/tasmota_457B8E/ot_tboiler"
+    current_temperature_topic: "tele/tasmota_457B8E/SENSOR"
+    current_temperature_template: "{{ value_json['OPENTHERM']['TB'] }}"
+
+  - platform: mqtt
+    unique_id: gasheater_hot_water
+    name: Gas Heater Hot Water
+    availability_topic: "tele/tasmota_457B8E/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    modes:
+      - "off"
+      - "heat"
+    max_temp: 80.0
+    min_temp: 30.0
+    send_if_off: false
+    mode_state_topic: "tele/tasmota_457B8E/SENSOR"
+    mode_state_template: >-
+      {{ 'heat' if value_json['OPENTHERM']['HWTMP']['REQ'] else 'off' }}
+    temperature_state_topic: "tele/tasmota_457B8E/SENSOR"
+    temperature_state_template: "{{ value_json['OPENTHERM']['HWTMP']['REQ'] }}"
+    temperature_command_topic: "cmnd/tasmota_457B8E/ot_twater"
+    current_temperature_topic: "tele/tasmota_457B8E/SENSOR"
+    current_temperature_template: "{{ value_json['OPENTHERM']['TB'] }}"
