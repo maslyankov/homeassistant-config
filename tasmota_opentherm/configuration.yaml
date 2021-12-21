@@ -18,6 +18,9 @@ climate:
       {{ 1 if 'heat' else 0 }}
     payload_on: "1"
     payload_off: "0"
+    action_topic: "tele/tasmota_457B8E/SENSOR"
+    action_template: >-
+      {{ 'heating' if value_json["OPENTHERM"]["FLM"] else 'idle' if value_json["OPENTHERM"]["SLAVE"]["FL"] else 'off'}}
     mode_state_topic: "tele/tasmota_457B8E/SENSOR"
     mode_state_template: >-
       {{ 'heat' if value_json["OPENTHERM"]["SLAVE"]["CH"] else 'off' }}
@@ -39,6 +42,9 @@ climate:
     max_temp: 80.0
     min_temp: 30.0
     send_if_off: false
+    action_topic: "tele/tasmota_457B8E/SENSOR"
+    action_template: >-
+      {{ 'heating' if value_json["OPENTHERM"]["FLM"] else 'idle' if value_json["OPENTHERM"]["SLAVE"]["FL"] else 'off'}}
     mode_state_topic: "tele/tasmota_457B8E/SENSOR"
     mode_state_template: >-
       {{ 'heat' if value_json['OPENTHERM']['HWTMP']['REQ'] else 'off' }}
