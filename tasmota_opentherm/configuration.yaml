@@ -15,7 +15,8 @@ climate:
     send_if_off: false
     mode_command_topic: "cmnd/tasmota_457B8E/ot_ch"
     mode_command_template: >-
-      {{ 1 if 'heat' else 0 }}
+      {% set values = { 'off':'0', 'heat':'1'} %}
+      {{ values[value] if value in values.keys() else '0' }}
     payload_on: "1"
     payload_off: "0"
     action_topic: "tele/tasmota_457B8E/SENSOR"
@@ -25,7 +26,7 @@ climate:
     mode_state_template: >-
       {{ 'heat' if value_json["OPENTHERM"]["SLAVE"]["CH"] else 'off' }}
     temperature_state_topic: "tele/tasmota_457B8E/SENSOR"
-    temperature_state_template: "{{ value_json['OPENTHERM']['BTMP']['REQ'] }}"
+    temperature_state_template: "{{ value_json['OPENTHERM']['BTMP']['REQ'] if value_json['OPENTHERM']['BTMP']['REQ'] else value_json['OPENTHERM']['BTMP']['ACT'] }}"
     temperature_command_topic: "cmnd/tasmota_457B8E/ot_tboiler"
     current_temperature_topic: "tele/tasmota_457B8E/SENSOR"
     current_temperature_template: "{{ value_json['OPENTHERM']['TB'] }}"
@@ -49,7 +50,7 @@ climate:
     mode_state_template: >-
       {{ 'heat' if value_json['OPENTHERM']['HWTMP']['REQ'] else 'off' }}
     temperature_state_topic: "tele/tasmota_457B8E/SENSOR"
-    temperature_state_template: "{{ value_json['OPENTHERM']['HWTMP']['REQ'] }}"
+    temperature_state_template: "{{ value_json['OPENTHERM']['HWTMP']['REQ'] if value_json['OPENTHERM']['HWTMP']['REQ'] else value_json['OPENTHERM']['HWTMP']['ACT'] }}"
     temperature_command_topic: "cmnd/tasmota_457B8E/ot_twater"
     current_temperature_topic: "tele/tasmota_457B8E/SENSOR"
     current_temperature_template: "{{ value_json['OPENTHERM']['TB'] }}"
