@@ -48,9 +48,9 @@ climate:
       {{ 'heating' if value_json["OPENTHERM"]["FLM"] else 'idle' if value_json["OPENTHERM"]["SLAVE"]["FL"] else 'off'}}
     mode_state_topic: "tele/tasmota_457B8E/SENSOR"
     mode_state_template: >-
-      {{ 'heat' if value_json['OPENTHERM']['HWTMP']['REQ'] else 'off' }}
+      {{ 'heat' if value_json['OPENTHERM']['DHWS'] else 'off' }}
     temperature_state_topic: "tele/tasmota_457B8E/SENSOR"
-    temperature_state_template: "{{ value_json['OPENTHERM']['HWTMP']['REQ'] if value_json['OPENTHERM']['HWTMP']['REQ'] else value_json['OPENTHERM']['HWTMP']['ACT'] }}"
+    temperature_state_template: "{{ value_json['OPENTHERM']['DHWS'] }}"
     temperature_command_topic: "cmnd/tasmota_457B8E/ot_twater"
     current_temperature_topic: "tele/tasmota_457B8E/SENSOR"
     current_temperature_template: "{{ value_json['OPENTHERM']['TB'] }}"
